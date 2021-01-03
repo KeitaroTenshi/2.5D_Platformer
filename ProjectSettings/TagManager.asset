@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LedgeGrabChecker
   - Ledge
+  - ElevatorPanel
   layers:
   - Default
   - TransparentFX
