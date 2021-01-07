@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _gravity = 0.15f;
     [SerializeField] private float _jumpHeight = 12.0f;
     [SerializeField] private GameObject _ledgeChecker;
+    private int _score;
     private bool _jumping;
     private bool _climbingUp = false;
     private Ledge _currentLedge;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     private Vector3 _velocity;
 
     private Animator _animator;
+    private UIManager _uiManager;
 
     void Start()
     {
@@ -31,6 +33,13 @@ public class Player : MonoBehaviour
         if (_animator == null)
         {
             Debug.LogError("null component _animator::Player");
+        }
+
+        _uiManager = GameObject.Find("UI_Manager").GetComponent<UIManager>();
+        
+        if (_uiManager == null)
+        {
+            Debug.LogError("null component _uiManager::Player");
         }
     }
 
@@ -113,5 +122,10 @@ public class Player : MonoBehaviour
         transform.position = _currentLedge.GetStandPos();
         _animator.SetBool("LedgeGrab", false);
         _controller.enabled = true;
+    }
+    public void ScoreUpdate()
+    {
+        _score++;
+        _uiManager.CoinsTextUpdate(_score);
     }
 }
